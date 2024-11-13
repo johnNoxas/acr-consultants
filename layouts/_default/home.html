@@ -1,0 +1,68 @@
+{{- if lt hugo.Version "0.125.7" }}
+{{- errorf "=> hugo v0.125.7 or greater is required for hugo-PaperMod to build " }}
+{{- end -}}
+
+<!DOCTYPE html>
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
+
+<head>
+    {{- partial "head.html" . }}
+</head>
+
+<body class="home 
+{{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) -}}
+{{- print " list" -}}
+{{- end -}}
+{{- if eq site.Params.defaultTheme `dark` -}}
+{{- print " dark" }}
+{{- end -}}
+" id="top">
+    {{- partialCached "header.html" . .Page -}}
+    <main class="main-content">
+        <div class="home-container">
+            <h1 class="main-title">ACR Consultants</h1>
+            <p class="subtitle">We are a team of experts in the field of business consulting, providing tailored solutions to meet your unique needs.</p>
+        
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="/images/card1.webp" alt="Card 1 description" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">About Us</h3>
+                        <p class="card-text">Meet the team and learn about our mission.</p>
+                    </div>
+                </div>
+        
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="/images/white-papers.webp" alt="Card 2 description" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">White Papers</h3>
+                        <p class="card-text">Read our research in an accessible format.</p>
+                    </div>
+                </div>
+        
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="/path/to/image3.jpg" alt="Card 3 description" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Projects</h3>
+                        <p class="card-text">Read about our projects and the work we have done.</p>
+                    </div>
+                </div>
+        
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="/path/to/image4.jpg" alt="Card 4 description" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Contact Us</h3>
+                        <p class="card-text">Speak to us about your business needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
+</body>
+
+</html>
